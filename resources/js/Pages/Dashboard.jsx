@@ -6,6 +6,7 @@ import { usePage } from "@inertiajs/inertia-react";
 
 export default function Dashboard() {
     const user = usePage().props.auth.user;
+    console.log(user);
 
     return (
         <div id="content">
