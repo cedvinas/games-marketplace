@@ -11,6 +11,6 @@ class UserController extends Controller
     public function addSellerRole(Request $request){
         $id = $request->all();
         DB::table('users')->where('id',$id)->update(['role' => 'seller']);
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('message', 'You became a game seller!');
     }
 }
