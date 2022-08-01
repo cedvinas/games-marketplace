@@ -1,0 +1,53 @@
+@import './var.scss';
+@import './index.scss';
+
+
+    
+
+    #search-btn{
+        background: $linear-bg;
+    }
+
+    section{
+        .top-picks{
+            display: flex;
+        }
+    }
+
+    .game{
+        height: 25rem;
+        width: 14rem;
+        background-color: #202330;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: 10%;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        margin: 0 1rem;
+
+
+        img{
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .card-footer{
+
+
+           
+
+
+            .card-cart-section{
+                background-color: #30374a;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+                height: 50px;
+
+                &:hover {
+                    background: $linear-bg;
+                }
+            }
+        }
+    }

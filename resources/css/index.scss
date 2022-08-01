@@ -1,0 +1,27 @@
+@import './var.scss';
+@import './Navbar.scss';
+
+body{
+    background-color: $bg-color;
+    color: $text-color;
+    
+    #content{
+        display: flex;
+
+        #main-content{
+            padding: 2rem;
+            width: 100%;
+        
+            
+            section{
+                border-bottom: 1px solid $border-color;
+                padding: 2rem 0;
+                h1{
+                    font-size: 2rem;
+                    margin-bottom: 1rem;
+                }
+                
+            }
+        }
+    }
+}

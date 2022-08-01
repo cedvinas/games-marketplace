@@ -1,0 +1,13 @@
+@import './var.scss';
+
+button{
+    background: $linear-bg;
+    padding: 1rem;
+    border-radius: 0.625rem;
+    color: white;
+    margin-right: 1rem;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
