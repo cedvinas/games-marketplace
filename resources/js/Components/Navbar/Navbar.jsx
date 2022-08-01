@@ -1,12 +1,14 @@
 import React from "react";
 import '../../../css/Navbar.scss';
 import NavLink from "./NavLink";
-import { usePage } from "@inertiajs/inertia-react";
+import { Link, usePage } from "@inertiajs/inertia-react";
 
 
 export default function Navbar() {
 
     const user = usePage().props.auth.user;
+    // console.log(user.id);
+    console.log(user);
 
     return (
         <aside>
@@ -20,7 +22,8 @@ export default function Navbar() {
                         <ul>
                             <NavLink url='/' text='Home' />
                             {user ? <NavLink url='/' text='Cart' /> : ''}
-                            {user ? <NavLink url='/dashboard' text='Dashboard' /> : ''}
+                            {user && user.role == 'seller' ? <NavLink url='/dashboard' text='Dashboard' /> : ''}
+                            {user && user.role == 'user' ? <Link href={route('addSellerRole')} data={{ id: user.id }} as='li' className="nav-link" method="post">Become Seller</Link> : ''}
                             <NavLink url='/' text='Home' />
                         </ul>
                     </div>

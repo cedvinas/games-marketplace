@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,5 +38,7 @@ Route::prefix('/dashboard')->group(function () {
 });
 
 Route::resource('games', GameController::class);
+
+Route::post('addsellerrole', [UserController::class, 'addSellerRole'])->name('addSellerRole');
 
 require __DIR__.'/auth.php';

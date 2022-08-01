@@ -13,13 +13,22 @@ export default function NavLink(props) {
                 as='li'>
                 {props.text}
             </Link>
+            : props.data ?
+                <Link
+                    className="nav-link"
+                    method={props.method}
+                    href={props.url}
+                    data={props.data}
+                    as='li'>
+                    {props.text}
+                </Link>
 
-            : <Link
-                className="nav-link"
-                href={props.url}
-                as='li'>
-                {props.text}
-            </Link>
+                : <Link
+                    className="nav-link"
+                    href={props.url}
+                    as='li'>
+                    {props.text}
+                </Link>
 
     )
 }
