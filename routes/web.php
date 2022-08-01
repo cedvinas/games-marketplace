@@ -40,5 +40,6 @@ Route::prefix('/dashboard')->group(function () {
 Route::resource('games', GameController::class);
 
 Route::post('addsellerrole', [UserController::class, 'addSellerRole'])->name('addSellerRole');
+Route::get('/dashboard', [UserController::class, 'checkRole'])->name('checkRole');
 
 require __DIR__.'/auth.php';
