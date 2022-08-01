@@ -7,6 +7,7 @@ import { usePage } from "@inertiajs/inertia-react";
 export default function Navbar() {
 
     const user = usePage().props.auth.user;
+    console.log(user);
 
     return (
         <aside>
@@ -19,8 +20,8 @@ export default function Navbar() {
                     <div id="nav-links">
                         <ul>
                             <NavLink url='/' text='Home' />
-                            <NavLink url='/dashboard' text='Dashboard' />
-                            <NavLink url='/' text='Home' />
+                            <NavLink url='/' text='Cart' />
+                            {user ? <NavLink url='/dashboard' text='Dashboard' /> : ''}
                             <NavLink url='/' text='Home' />
                         </ul>
                     </div>

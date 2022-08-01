@@ -39,7 +39,7 @@ class GameController extends Controller
                 'price' => $request->input('price'),
             );
             $game->create($data);
-            return Inertia::render('SellerDashboard');
+            return Inertia::render('Dashboard');
         }
         return Inertia::render('AddGame');
     }

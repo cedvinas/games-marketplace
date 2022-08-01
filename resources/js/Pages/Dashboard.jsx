@@ -1,15 +1,22 @@
-import React from 'react';
-import Authenticated from '@/Layouts/Authenticated';
-import '../../css/dashboard.scss';
-export default function Dashboard(props) {
-    return (
-        <Authenticated
-            auth={props.auth}
-            errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
-        >
+import React from "react";
+import Navbar from "@/Components/Navbar/Navbar";
+import Button from "@/Components/Button";
+import '../../css/index.scss';
+import { usePage } from "@inertiajs/inertia-react";
 
-            <a href="game.create"><button>List a game</button></a>
-        </Authenticated>
-    );
+export default function Dashboard() {
+    const user = usePage().props.auth.user;
+
+    return (
+        <div id="content">
+            <Navbar />
+            <div id="main-content">
+                <section>
+                    <h1>{user.name} Dashboard</h1>
+                    <Button text='Sell games' link='/dashboard/add' />
+                    <Button text='Your listed games' link='/dashboard/listedgames' />
+                </section>
+            </div>
+        </div>
+    )
 }

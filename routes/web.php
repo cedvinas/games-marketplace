@@ -26,7 +26,7 @@ use Inertia\Inertia;
 // });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('SellerDashboard');
+    return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/', [GameController::class, 'index']);
