@@ -71,9 +71,11 @@ class GameController extends Controller
         
             
         return Inertia::render('EditGame', ['game' => $game]);
-        
-    
+    }
 
-   
-}
+    public function destroy(int $id, Game $game){
+        $game = Game::findOrFail($id);
+        $game->delete();
+        return redirect('/')->with('success', 'Game deleted!');
+    }
 }

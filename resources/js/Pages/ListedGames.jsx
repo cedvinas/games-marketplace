@@ -44,7 +44,10 @@ const ListedGames = () => {
                                                 <td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>{price}</td>
                                                 <td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>{quantity}</td>
 
-                                                <td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'><InertiaLink href={'/dashboard/edit/' + id} as='button'>Edit</InertiaLink></td>
+                                                <td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>
+                                                    <InertiaLink href={'/dashboard/edit/' + id} as='button'>Edit</InertiaLink>
+                                                    <InertiaLink href={'delete/' + id} as='button'>Delete</InertiaLink>
+                                                </td>
 
                                             </tr>
                                         )

@@ -38,9 +38,10 @@ Route::prefix('/dashboard')->group(function () {
     Route::post('/edit/{id}', [GameController::class, 'edit']);
     Route::get('/edit/{id}', [GameController::class, 'edit']);
     Route::match(['get', 'post'], '/listedgames', [GameController::class, 'list']);
+    Route::get('/delete/{id}', [GameController::class, 'destroy']);
 });
-
 Route::resource('games', GameController::class);
+
 
 Route::post('addsellerrole', [UserController::class, 'addSellerRole'])->name('addSellerRole');
 Route::match(['get', 'post'],'/dashboard', [UserController::class, 'checkRole'])->name('checkRole');
