@@ -4,9 +4,12 @@ import Navbar from "@/Components/Navbar/Navbar";
 import Button from "@/Components/Button";
 import { Inertia } from "@inertiajs/inertia";
 import { useState } from "react";
+import { usePage } from "@inertiajs/inertia-react";
 
 export default function AddGame() {
 
+    const user = usePage().props.auth.user;
+    const [userId, setUserId] = useState(user.id)
     const [title, setTitle] = useState('');
     const [key, setKey] = useState('');
     const [quantity, setQuantity] = useState(0);
@@ -18,7 +21,7 @@ export default function AddGame() {
 
     const saveData = (e) => {
         e.preventDefault();
-        Inertia.post('/dashboard/add', { title, key, quantity, price, imageUrl, description })
+        Inertia.post('/dashboard/add', { title, key, quantity, price, imageUrl, description, userId })
     }
     return (
         <div id="content">

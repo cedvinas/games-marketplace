@@ -3,11 +3,20 @@ import Navbar from "@/Components/Navbar/Navbar";
 import Button from "@/Components/Button";
 import Success from "@/Components/Alerts/Success";
 import '../../css/index.scss';
-import { usePage } from "@inertiajs/inertia-react";
+import { usePage, InertiaLink } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
+import { useState } from "react";
 
 export default function Dashboard() {
     const user = usePage().props.auth.user;
-    const success = usePage().props.success
+    const message = usePage().props.message
+    const [userId, setUserId] = useState(user.id)
+
+
+    const sendUserId = (e) => {
+        e.preventDefault();
+        Inertia.post('/dashboard/listedgames', { userId })
+    }
 
 
 
@@ -16,12 +25,12 @@ export default function Dashboard() {
             <Navbar />
             <div id="main-content">
                 <section>
-                    {success.message && (
-                        <Success message={success.message} />
+                    {message.success && (
+                        <Success message={message.success} />
                     )}
                     <h1>{user.name} Dashboard</h1>
                     <Button text='Sell games' link='/dashboard/add' />
-                    <Button text='Your listed games' link='/dashboard/listedgames' />
+                    <InertiaLink onClick={sendUserId} as="button" href="/dashboard/listedgames" method="post">Your listed games</InertiaLink>
                 </section>
             </div>
         </div>

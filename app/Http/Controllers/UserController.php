@@ -17,10 +17,9 @@ class UserController extends Controller
     public function checkRole(Request $request){
         $role = $request->input('role');
         if ($role == 'seller' || $role == 'admin') {
-            return redirect('/dashboard');
+            return Inertia::render('Dashboard');
         }else{
-            return redirect('/')->with('error', 'You have to be logged in first!');
+            return redirect('/')->with('error', 'You have to be a seller first!');
         }
-        dd($role);
     }
 }

@@ -13,8 +13,9 @@ class GameController extends Controller
         return Inertia::render('Index', ['games' => $games]);
     }
 
-    public function list(){
-        $games = Game::get();
+    public function list(Request $request){
+        $userId = $request->input('userId');
+        $games = Game::where('user_id', '=', $userId)->get();
         return Inertia::render('ListedGames', ['games' => $games]);
     }
 
@@ -27,6 +28,8 @@ class GameController extends Controller
                 'imageUrl' => 'required',
                 'key' => 'required',
                 'price' => 'required',
+                'userId' => 'required',
+                
                 
             ]);
             $game = new Game();
@@ -37,6 +40,7 @@ class GameController extends Controller
                 'image-link' => $request->input('imageUrl'),
                 'key' => $request->input('key'),
                 'price' => $request->input('price'),
+                'user_id' => $request->input('userId'),
             );
             $game->create($data);
             return Inertia::render('Dashboard');

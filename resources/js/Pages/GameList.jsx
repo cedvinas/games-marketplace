@@ -17,12 +17,8 @@ export default function GameList() {
     return (
         <div id="main-content">
             <header>
-                {message.success && (
-                    <Success message={message.success} />
-                )
-                    || (
-                        <Error message={message.error} />
-                    )}
+                {message.success && message.success != null ? <Success message={message.success} /> : ''}
+                {message.error && message.error != null ? <Error message={message.error} /> : ''}
                 <SearchBar />
             </header>
 

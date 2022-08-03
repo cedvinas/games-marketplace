@@ -34,12 +34,14 @@ Route::get('/', [GameController::class, 'index']);
 Route::prefix('/dashboard')->group(function () {
     Route::get('/add', [GameController::class, 'add']);
     Route::post('/add', [GameController::class, 'add']);
-    Route::get('/listedgames', [GameController::class, 'list']);
+    Route::match(['get', 'post'], '/listedgames', [GameController::class, 'list']);
 });
 
 Route::resource('games', GameController::class);
 
 Route::post('addsellerrole', [UserController::class, 'addSellerRole'])->name('addSellerRole');
-Route::get('/dashboard', [UserController::class, 'checkRole'])->name('checkRole');
+Route::match(['get', 'post'],'/dashboard', [UserController::class, 'checkRole'])->name('checkRole');
+Route::post('/dashboard', [UserController::class, 'checkRole'])->name('checkRole');
+
 
 require __DIR__.'/auth.php';
