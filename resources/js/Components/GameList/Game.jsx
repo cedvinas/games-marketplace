@@ -3,7 +3,7 @@ import React from "react";
 export default function Game(props) {
 
     return (
-        <div className="game">
+        <div key={props.key} className="game">
             <img src={props.img} alt="game-img" />
             <div className="card-footer">
                 <div className="card-title">
