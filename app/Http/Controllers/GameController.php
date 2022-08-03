@@ -37,7 +37,7 @@ class GameController extends Controller
                 'title' => $request->input('title'),
                 'quantity' => $request->input('quantity'),
                 'description' => $request->input('description'),
-                'image-link' => $request->input('imageUrl'),
+                'image_link' => $request->input('imageUrl'),
                 'key' => $request->input('key'),
                 'price' => $request->input('price'),
                 'user_id' => $request->input('userId'),
@@ -48,5 +48,32 @@ class GameController extends Controller
         return Inertia::render('AddGame');
     }
 
+    public function edit(int $id, Request $request, Game $game){
+        
+        $game = Game::where('id', '=', $id )->get();
+        if($request->isMethod('post')){
+
+            
+            $data = array(
+                'title' => $request->input('title'),
+                'quantity' => $request->input('quantity'),
+                'description' => $request->input('description'),
+                'image_link' => $request->input('imageUrl'),
+                'key' => $request->input('key'),
+                'price' => $request->input('price'),
+            );
+            
+            $gameEdit = Game::findOrFail($id);
+            $gameEdit->update($data);
+
+            return redirect('/')->with('success', 'Game updated!');
+        }
+        
+            
+        return Inertia::render('EditGame', ['game' => $game]);
+        
+    
+
    
+}
 }

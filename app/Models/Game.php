@@ -17,7 +17,7 @@ class Game extends Model
         'price',
         'quantity',
         'key',
-        'image-link',
+        'image_link',
         'user_id',
     ];
 }

@@ -34,6 +34,9 @@ Route::get('/', [GameController::class, 'index']);
 Route::prefix('/dashboard')->group(function () {
     Route::get('/add', [GameController::class, 'add']);
     Route::post('/add', [GameController::class, 'add']);
+    // Route::match(['get', 'post'], '/edit', [GameController::class, 'edit']);
+    Route::post('/edit/{id}', [GameController::class, 'edit']);
+    Route::get('/edit/{id}', [GameController::class, 'edit']);
     Route::match(['get', 'post'], '/listedgames', [GameController::class, 'list']);
 });
 

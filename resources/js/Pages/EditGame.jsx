@@ -1,36 +1,38 @@
-import React from "react";
+import Navbar from '@/Components/Navbar/Navbar'
 import '../../css/index.scss';
-import Navbar from "@/Components/Navbar/Navbar";
-import Button from "@/Components/Button";
-import { Inertia } from "@inertiajs/inertia";
-import { useState } from "react";
-import { usePage } from "@inertiajs/inertia-react";
+import React from 'react'
+import { usePage } from '@inertiajs/inertia-react';
+import { useState } from 'react';
+import Button from '@/Components/Button';
+import { Inertia } from '@inertiajs/inertia';
 
-export default function AddGame() {
 
+const EditGame = () => {
+
+    const game = usePage().props.game[0];
     const user = usePage().props.auth.user;
-    const [userId, setUserId] = useState(user.id)
-    const [title, setTitle] = useState('');
-    const [key, setKey] = useState('');
-    const [quantity, setQuantity] = useState(0);
-    const [price, setPrice] = useState(0);
-    const [imageUrl, setImageUrl] = useState('');
-    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState(game.title);
+    const [key, setKey] = useState(game.key);
+    const [quantity, setQuantity] = useState(game.quantity);
+    const [price, setPrice] = useState(game.price);
+    const [imageUrl, setImageUrl] = useState(game.image_link);
+    const [description, setDescription] = useState(game.description);
+
 
 
     const saveData = (e) => {
         e.preventDefault();
-        Inertia.post('/dashboard/add', { title, key, quantity, price, imageUrl, description, userId })
+        Inertia.post('/dashboard/edit/' + game.id, { title, key, quantity, price, imageUrl, description })
     }
+
     return (
-        <div id="content">
+        <div id='content'>
             <Navbar />
-            <div id="main-content">
+            <div id='main-content'>
                 <section>
-                    <h1>Sell your games</h1>
+                    <h1>Edit game</h1>
                 </section>
                 <section>
-
                     <form onSubmit={saveData}>
                         <div className="relative z-0 mb-6 w-full group">
                             <input
@@ -109,9 +111,10 @@ export default function AddGame() {
                         </div>
                         <Button type='submit' text='Submit' />
                     </form>
-
                 </section>
             </div>
         </div>
     )
 }
+
+export default EditGame
