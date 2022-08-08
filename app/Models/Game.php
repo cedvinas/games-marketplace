@@ -20,4 +20,6 @@ class Game extends Model
         'image_link',
         'user_id',
     ];
+
+    
 }

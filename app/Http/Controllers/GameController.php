@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\ListedGame;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -45,6 +47,7 @@ class GameController extends Controller
             $game->create($data);
             return Inertia::render('Dashboard');
         }
+
         return Inertia::render('AddGame');
     }
 
@@ -78,4 +81,11 @@ class GameController extends Controller
         $game->delete();
         return redirect('/')->with('success', 'Game deleted!');
     }
+
+    public function show(int $id, Game $game){
+        $game = Game::findOrFail($id);
+        return Inertia::render('ShowGame', ['game' => $game]);
+    }
+
+    
 }

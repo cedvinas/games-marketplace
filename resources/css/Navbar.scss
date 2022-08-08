@@ -3,6 +3,9 @@
 aside{
     width: 20%;
     nav{
+        position: sticky;
+        left: 0;
+        top: 0;
         width: 100%;
         height: 100vh;
         padding: 2rem;

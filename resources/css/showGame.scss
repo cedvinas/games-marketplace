@@ -1,0 +1,20 @@
+@import './var.scss';
+
+.game-info-container{
+    display: flex;
+    .show-game-img{
+        img{
+            height: 500px;
+            width: 400px;
+        }
+    }
+
+    .show-game-desc{
+        width: 50%;
+        margin: 0 0 0 5rem;
+
+        h2{
+            font-size: 1.5rem;
+        }
+    }
+}

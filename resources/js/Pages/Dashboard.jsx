@@ -7,10 +7,13 @@ import { usePage, InertiaLink } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
 import { useState } from "react";
 
+
 export default function Dashboard() {
     const user = usePage().props.auth.user;
     const message = usePage().props.message
     const [userId, setUserId] = useState(user.id)
+
+    console.log(user);
 
 
     const sendUserId = (e) => {
@@ -31,6 +34,8 @@ export default function Dashboard() {
                     <h1>{user.name} Dashboard</h1>
                     <Button text='Sell games' link='/dashboard/add' />
                     <InertiaLink onClick={sendUserId} as="button" href="/dashboard/listedgames" method="post">Your listed games</InertiaLink>
+                    {user.role == 'admin' ? <InertiaLink as='button' href="/dashboard/admin/game/listall">All listed games</InertiaLink> : ''}
+                    {user.role == 'admin' ? <InertiaLink as='button' href="/dashboard/admin/users/listall">All users</InertiaLink> : ''}
                 </section>
             </div>
         </div>

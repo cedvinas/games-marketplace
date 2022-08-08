@@ -29,7 +29,7 @@ export default function GameList() {
                     {
                         games.map(game => {
                             return (
-                                <Game key={game.id} title={game.title} price={game.price} img={game.image_link} />
+                                <Game key={game.id} title={game.title} price={game.price} img={game.image_link} id={game.id} />
                             )
                         })
                     }

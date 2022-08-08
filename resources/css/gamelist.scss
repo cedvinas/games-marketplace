@@ -29,12 +29,17 @@
         border-bottom-right-radius: 20px;
         margin: 0 1rem 2rem 1rem;
 
+       
+
 
         img{
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
             height: 280px;
             width: 224px;
+            &:hover{
+                cursor: pointer;
+            }
         }
 
         .card-footer{

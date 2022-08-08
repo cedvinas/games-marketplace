@@ -8,6 +8,8 @@ import { usePage } from "@inertiajs/inertia-react";
 
 export default function AddGame() {
 
+
+
     const user = usePage().props.auth.user;
     const [userId, setUserId] = useState(user.id)
     const [title, setTitle] = useState('');
@@ -16,6 +18,7 @@ export default function AddGame() {
     const [price, setPrice] = useState(0);
     const [imageUrl, setImageUrl] = useState('');
     const [description, setDescription] = useState('');
+
 
 
     const saveData = (e) => {
@@ -32,6 +35,7 @@ export default function AddGame() {
                 <section>
 
                     <form onSubmit={saveData}>
+
                         <div className="relative z-0 mb-6 w-full group">
                             <input
                                 type="text"
@@ -42,7 +46,7 @@ export default function AddGame() {
                                 onChange={(e) => setTitle(e.target.value)} />
                             <label
                                 htmlFor="floating_title"
-                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Title</label>
+                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-8T00 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Title</label>
                         </div>
 
                         <div className="grid md:grid-cols-2 md:gap-6">
@@ -56,7 +60,7 @@ export default function AddGame() {
                                     onChange={(e) => setKey(e.target.value)} />
                                 <label
                                     htmlFor="key"
-                                    className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Game key</label>
+                                    className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-800 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Game key</label>
                             </div>
                             <div className="relative z-0 mb-6 w-full group">
                                 <input
@@ -112,6 +116,6 @@ export default function AddGame() {
 
                 </section>
             </div>
-        </div>
+        </div >
     )
 }
