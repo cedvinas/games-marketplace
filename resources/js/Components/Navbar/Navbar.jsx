@@ -21,9 +21,9 @@ export default function Navbar() {
                         <ul>
                             <NavLink url='/' text='Home' />
                             {user ? <NavLink url='/cart/show' text='Cart' /> : ''}
-                            {user && user.role == 'seller' || user && user.role == 'admin' ? <Link href='/dashboard' as="li" className="nav-link" method="post" data={{ role: user.role }}>Dashboard</Link> : ''}
-                            {user && user.role == 'user' ? <Link href={route('addSellerRole')} data={{ id: user.id }} as='li' className="nav-link" method="post">Become Seller</Link> : ''}
-                            <NavLink url='/' text='Home' />
+                            {/* {user ? <Link href='/dashboard' as="li" className="nav-link" method="post" data={{ role: user.role }}>Dashboard</Link> : ''} */}
+                            {user ? <Link href='/dashboard' as="li" className="nav-link">Dashboard</Link> : ''}
+
                         </ul>
                     </div>
                 </div>

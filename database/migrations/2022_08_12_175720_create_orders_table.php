@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('games', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->integer('stock');
-            $table->text('description');
-            $table->text('image_link');
-            $table->string('key');
-            $table->integer('price');
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained('users', 'id');
+            $table->json('games');
+            $table->integer('total');
         });
     }
 
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('orders');
     }
 };

@@ -12,9 +12,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public const ROLE_ADMIN = 'Admin';
-    public const ROLE_SELLER = 'Seller';
-    public const ROLE_USER = 'User';
+    
 
     /**
      * The attributes that are mass assignable.
@@ -46,5 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

@@ -3,36 +3,58 @@ import Navbar from '../Components/Navbar/Navbar'
 import '../../css/index.scss'
 import { usePage } from '@inertiajs/inertia-react';
 import { InertiaLink } from '@inertiajs/inertia-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Inertia } from '@inertiajs/inertia';
+
 
 
 
 export default function Cart() {
-
-	console.log(usePage().props.games);
-	const games = usePage().props.games;
-	const [quantity, setQuantity] = useState({});
-	const [totalPrice, setTotalPrice] = useState(0);
-
-	const [cart, setCart] = useState([]);
-	console.log(cart);
-
-	const countQuantity = (e, price) => {
-		setQuantity({
-			...quantity,
-			[e.target.name]: e.target.value
-		})
+	const games = usePage().props.basket.items;
+	const [totalPrice, setTotalPrice] = useState(usePage().props.basket.totalPrice);
+	const user = usePage().props.auth.user;
+	console.log(user);
 
 
 
-		setCart([
-			...cart,
-			{
-				[e.target.name]: e.target.value,
-				'price': price
+
+
+	const handleChange = (e) => {
+		games.forEach(game => {
+			if (game.gameId == e.target.name) {
+				game.quantity = Number(e.target.value);
+				game.total = game.quantity * game.unitPrice;
 			}
-		])
+			countTotalPrice(game.total);
+		})
+	};
+
+
+
+
+
+	const countTotalPrice = (total) => {
+		let test = 0;
+		games.forEach(game => {
+			test += game.total;
+			console.log('test' + test);
+		})
+		setTotalPrice(totalPrice + total);
 	}
+
+	const checkout = (e) => {
+		e.preventDefault();
+		Inertia.post('/cart/checkout', [games, user.id]);
+	}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -41,6 +63,7 @@ export default function Cart() {
 		<div id='content'>
 			<Navbar />
 			<div id='main-content'>
+
 				<section>
 					<h1>Your cart</h1>
 				</section>
@@ -52,24 +75,18 @@ export default function Cart() {
 								<th className='border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left'>Title</th>
 								<th className='border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left'>Price</th>
 								<th className='border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left'>Quantity</th>
-								<th className='border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left'>Action</th>
 							</tr>
 						</thead>
 						{
 							games ?
 								<tbody className='bg-white dark:bg-slate-800'>
-									{games.map(({ id, title, price }) => {
+									{games.map((game) => {
 										return (
-											<tr key={id}>
-												<td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>{title}</td>
-												<td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>{price}€</td>
+											<tr key={game.gameId}>
+												<td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>{game.title}</td>
+												<td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>{game.unitPrice}€</td>
 												<td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>
-													<input name={id} type="number" defaultValue={0} onChange={(e) => countQuantity(e, price)} />
-												</td>
-
-												<td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>
-													<InertiaLink href={'/dashboard/edit/' + id} as='button'>Edit</InertiaLink>
-													<InertiaLink href={'delete/' + id} as='button'>Delete</InertiaLink>
+													<input min='1' max={game.stock} onChange={handleChange} name={game.gameId} type="number" defaultValue={game.quantity} />
 												</td>
 											</tr>
 										)
@@ -81,6 +98,8 @@ export default function Cart() {
 						}
 
 					</table>
+					<InertiaLink as='button' href='/cart/clear'>Clear</InertiaLink>
+					<InertiaLink onClick={(e) => checkout(e)} as='button'>Checkout</InertiaLink>
 				</section>
 
 			</div>

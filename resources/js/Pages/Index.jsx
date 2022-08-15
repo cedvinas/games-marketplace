@@ -7,6 +7,7 @@ import '../../css/index.scss'
 export default function Index() {
 
 
+
     return (
         <div id="content">
             <Navbar />

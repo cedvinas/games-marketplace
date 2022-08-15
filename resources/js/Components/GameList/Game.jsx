@@ -1,7 +1,13 @@
 import React from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { InertiaLink, usePage } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
 
 export default function Game(props) {
+    const user = usePage().props.auth.user;
+
+    const handleClick = () => {
+        Inertia.post(route('add.item'), { 'gameId': props.id, 'quantity': 1, 'unitPrice': props.price, 'key': props.cd_key, 'stock': props.stock });
+    };
 
     return (
         <div className="game" key={props.id}>
@@ -14,10 +20,13 @@ export default function Game(props) {
                 </div>
                 <div className="card-cart-section">
                     <h2>{props.price}€</h2>
-                    <InertiaLink href={'cart/add/' + props.id} as='i' className="fa-solid fa-basket-shopping" color="white" />
+                    {
+                        user ? <i onClick={handleClick} className="fa-solid fa-basket-shopping"></i> : ''
+                    }
+
 
                 </div>
             </div>
-        </div >
+        </div>
     )
 }

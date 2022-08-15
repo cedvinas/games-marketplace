@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
@@ -38,26 +39,29 @@ Route::prefix('/dashboard')->group(function () {
     Route::get('/edit/{id}', [GameController::class, 'edit']);
     Route::match(['get', 'post'], '/listedgames', [GameController::class, 'list']);
     Route::get('/delete/{id}', [GameController::class, 'destroy']);
+    Route::prefix('/order')->group(function () {
+        Route::get('/history/{id}', [UserController::class, 'orderHistory']);
+    });
 
-    Route::prefix('/admin')->group(function (){
+    Route::prefix('/admin')->group(function () {
         Route::get('/game/listall', [AdminController::class, 'listAllGames']);
         Route::get('/game/delete/{id}', [AdminController::class, 'destroyGame']);
         Route::get('/users/listall', [AdminController::class, 'listAllUsers']);
     });
 });
-// Route::resource('games', GameController::class);
 
-Route::prefix('/cart')->group(function(){
-    Route::get('/show', [CartController::class, 'show']);
-    Route::get('/add/{id}', [CartController::class, 'add']);
+Route::prefix('/cart')->group(function () {
+    Route::get('/show', [BasketController::class, 'getBasket']);
+    Route::post('/add', [BasketController::class, 'addItem'])->name('add.item');
+    Route::post('/checkout', [BasketController::class, 'checkout']);
+    Route::get('/clear', [BasketController::class, 'clear']);
 });
 
 
 Route::get('/game/{id}', [GameController::class, 'show']);
 
 Route::post('addsellerrole', [UserController::class, 'addSellerRole'])->name('addSellerRole');
-Route::match(['get', 'post'],'/dashboard', [UserController::class, 'checkRole'])->name('checkRole');
-Route::post('/dashboard', [UserController::class, 'checkRole'])->name('checkRole');
+Route::get('/dashboard', [UserController::class, 'dashboard']);
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

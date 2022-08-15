@@ -3,11 +3,15 @@ import '../../css/index.scss'
 import Navbar from '@/Components/Navbar/Navbar'
 import { usePage } from '@inertiajs/inertia-react'
 import '../../css/showGame.scss';
+import { Inertia } from '@inertiajs/inertia';
+
 
 const ShowGame = () => {
     const game = usePage().props.game;
-    console.log(game);
-    return (
+    const user = usePage().props.auth.user;
+    const handleClick = () => {
+        Inertia.post(route('add.item'), { 'gameId': game.id, 'quantity': 1, 'unitPrice': game.price, 'key': game.key, 'stock': game.stock });
+    }; return (
         <div id='content'>
             <Navbar />
             <div id='main-content'>
@@ -23,6 +27,12 @@ const ShowGame = () => {
                         <div className='show-game-desc'>
                             <h2>Description</h2>
                             <span>{game.description}</span>
+                            <br />
+                            <br />
+                            {
+                                user ? <button onClick={handleClick}>Add to cart</button>
+                                    : ''
+                            }
                         </div>
                     </div>
                 </section>

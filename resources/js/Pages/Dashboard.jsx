@@ -32,12 +32,29 @@ export default function Dashboard() {
                         <Success message={message.success} />
                     )}
                     <h1>{user.name} Dashboard</h1>
-                    <Button text='Sell games' link='/dashboard/add' />
-                    <InertiaLink onClick={sendUserId} as="button" href="/dashboard/listedgames" method="post">Your listed games</InertiaLink>
-                    {user.role == 'admin' ? <InertiaLink as='button' href="/dashboard/admin/game/listall">All listed games</InertiaLink> : ''}
-                    {user.role == 'admin' ? <InertiaLink as='button' href="/dashboard/admin/users/listall">All users</InertiaLink> : ''}
+                    <div className="flex">
+                        {user.role == 'seller' || user.role == 'admin' ?
+                            <div>
+                                <Button text='Sell games' link='/dashboard/add' />
+                                <InertiaLink as="button" href={"/dashboard/order/history/" + user.id}>Order history</InertiaLink>
+                                <InertiaLink onClick={sendUserId} as="button" href="/dashboard/listedgames" method="post">Your listed games</InertiaLink>
+                            </div> : ''}
+
+                        {user.role == 'admin' ?
+                            <div>
+                                <InertiaLink as='button' href="/dashboard/admin/game/listall">All listed games</InertiaLink>
+                                <InertiaLink as='button' href="/dashboard/admin/users/listall">All users</InertiaLink>
+                            </div> : ''}
+
+                        {user.role == 'user' ?
+                            <div>
+                                <InertiaLink href={route('addSellerRole')} data={{ id: user.id }} as='button' method="post">Become Seller</InertiaLink>
+                                <InertiaLink as="button" href={"/dashboard/order/history/" + user.id}>Order history</InertiaLink>
+                            </div> : ''}
+                    </div>
+
                 </section>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
