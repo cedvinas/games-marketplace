@@ -45,6 +45,6 @@ class AdminController extends Controller
             $user->delete();
             return redirect('/')->with('success', 'User removed!');
         }
-        // return redirect('/')->with('error', "You're not an administrator!");
+        return redirect('/')->with('error', "You're not an administrator!");
     }
 }
