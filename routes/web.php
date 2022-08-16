@@ -47,6 +47,7 @@ Route::prefix('/dashboard')->group(function () {
         Route::get('/game/listall', [AdminController::class, 'listAllGames']);
         Route::get('/game/delete/{id}', [AdminController::class, 'destroyGame']);
         Route::get('/users/listall', [AdminController::class, 'listAllUsers']);
+        Route::get('/delete/user/{id}', [AdminController::class, 'deleteUser']);
     });
 });
 

@@ -16,7 +16,7 @@ class AdminController extends Controller
             $games = Game::all();
             return Inertia::render('Admin/AllGames', ['games' => $games]);
         }
-        redirect('/')->with('error', "You're not an administrator!");
+        return redirect('/')->with('error', "You're not an administrator!");
     }
 
     public function destroyGame(int $id, Game $game)
@@ -26,7 +26,7 @@ class AdminController extends Controller
             $game->delete();
             return redirect('/')->with('success', 'Game removed!');
         }
-        redirect('/')->with('error', "You're not an administrator!");
+        return redirect('/')->with('error', "You're not an administrator!");
     }
 
     public function listAllUsers()
@@ -35,6 +35,16 @@ class AdminController extends Controller
             $users = User::all();
             return Inertia::render('Admin/AllUsers', ['users' => $users]);
         }
-        redirect('/')->with('error', "You're not an administrator!");
+        return redirect('/')->with('error', "You're not an administrator!");
+    }
+
+    public function deleteUser(int $id)
+    {
+        if (Auth::check()) {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return redirect('/')->with('success', 'User removed!');
+        }
+        // return redirect('/')->with('error', "You're not an administrator!");
     }
 }

@@ -39,7 +39,7 @@ const AllUsers = () => {
                                                 <td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>{role}</td>
 
                                                 <td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>
-                                                    <InertiaLink href={'delete/' + id} as='button'>Delete</InertiaLink>
+                                                    <InertiaLink href={'/dashboard/admin/delete/user/' + id} as='button'>Delete</InertiaLink>
                                                 </td>
 
                                             </tr>

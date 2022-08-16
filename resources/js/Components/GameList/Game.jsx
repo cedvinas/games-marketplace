@@ -2,7 +2,7 @@ import React from "react";
 import { InertiaLink, usePage } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
 
-export default function Game(props) {
+const Game = (props) => {
     const user = usePage().props.auth.user;
 
     const handleClick = () => {
@@ -30,3 +30,5 @@ export default function Game(props) {
         </div>
     )
 }
+
+export default Game;
